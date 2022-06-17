@@ -11,10 +11,13 @@ namespace NumerosPrimosSharp
         {
             bool correr = true;
             int decision = 0;
+            DateTime fecha;
+            CultureInfo culture;
 
             Console.WriteLine("############################### FUNCION CONTADORA DE PRIMOS #################################");
             Console.WriteLine("############################### METODO PRODUCTORIA CASTAÑEDA ################################");
             Console.WriteLine("###################################### +507 6231-9187 #######################################");
+            Console.WriteLine("################################## irojacastag@gmail.com ####################################");
 
             while (correr)
             {
