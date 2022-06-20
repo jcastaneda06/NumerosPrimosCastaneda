@@ -5,15 +5,15 @@ using System.Numerics;
 
 namespace NumerosPrimosSharp
 {
-    internal class Program
+    internal class EliminacionDePosiciones
     {
-        static void Main2(string[] args)
+        static void Main(string[] args)
         {
             bool correr = true;
             int decision = 0;
 
             Console.WriteLine("############################### FUNCION CONTADORA DE PRIMOS #################################");
-            Console.WriteLine("############################### METODO PRODUCTORIA CASTAÑEDA ################################");
+            Console.WriteLine("######################### METODO ELIMINACION DE POSICION CASTAÑEDA ##########################");
             Console.WriteLine("###################################### +507 6231-9187 #######################################");
             Console.WriteLine("################################## irojacastag@gmail.com ####################################");
 
@@ -31,11 +31,14 @@ namespace NumerosPrimosSharp
                 int J = 0;
                 int Pix = 0;
                 int Pj = 0;
+                int Ci = 0;
+                int Co = 0;
+                int Pc = 0;
 
                 Console.WriteLine("Introduzca X para pi(X) \nX = ");
                 X = Convert.ToInt32(Console.ReadLine());
 
-                int[] P = new int[X];
+                var P = new List<int>();
                 Kx = (int)(Math.Round((2 * X - 6 - Math.Pow(-1, X)) / 6));
                 //Qx = (int)(Math.Floor(Math.Sqrt(X)));
                 Ix = (int)(Math.Floor(Convert.ToDouble((2 * Math.Sqrt(X) - 3) / 6)));
@@ -47,7 +50,7 @@ namespace NumerosPrimosSharp
 
                 for (k = 1; k <= Kx; k++)
                 {
-                    P[k] = (int)(6 * k + 3 - Math.Pow(-1, k)) / 2;
+                    P.Add((int)(6 * k + 3 - Math.Pow(-1, k)) / 2);
                 }
 
                 int m = 0;
@@ -68,46 +71,52 @@ namespace NumerosPrimosSharp
                 sw.Start();
                 for (i = 1; i <= Ix; i++)
                 {
-                    if (P[i] != 0)
+                    Jxi = (int)Math.Floor(Convert.ToDouble(Kx / P[i - 1] - Ci));    //Se debe redondear Jxi al menor valor con cero decimales
+                    Jii = i;
+                    for (k = Jii; k <= Jxi; k++)
                     {
-                        Jxi = (int)Math.Floor(Convert.ToDouble(Kx / P[i]));    //Se debe redondear Jxi al menor valor con cero decimales
-                        Jii = i;
-                        for (k = Jii; k <= Jxi; k++)
+                        Pj = P[i - 1] * P[k - 1];
+                        //J = Convert.ToInt32(Math.Round((2.0 * Pj - 3) / 6));    //Se debe redondear J al valor con cero decimales
+                        Q.Add(Pj);
+                        Pn += 1;
+                        if (respuesta == 1)
                         {
-                            if (P[k] == 0)
-                            {
-                                continue;
-                            }
-                            Pj = P[i] * P[k];
-                            //J = Convert.ToInt32(Math.Round((2.0 * Pj - 3) / 6));    //Se debe redondear J al valor con cero decimales
-                            Q.Add(Pj);
-                            Pn += 1;
-                            if (respuesta == 1)
-                            {
-                                Console.WriteLine("i = {0} | k = {1} | Pk = {2} | J = {3}", i, k, Pj, J);
-                                Console.WriteLine("----------------------------------------");
-                            }
-                            //Console.ReadLine();
+                            Console.WriteLine("i = {0} | k = {1} | Pk = {2} | Ci = {3}", i, k, Pj, Ci);
+                            Console.WriteLine("----------------------------------------");
+                        }
+                        //Console.ReadLine();
 
-                        }
-                        if (Pj > X)
-                        {
-                            Pn -= 1;
-                        }
-                        foreach (int q in Q)
-                        {
-                            J = Convert.ToInt32(Math.Round((2.0 * q - 3) / 6));
-                            P[J] = 0;
-                        }
-                        Q.Clear();
                     }
+                    if (Pj > X)
+                    {
+                        Pn -= 1;
+                    }
+                    
+                    Co = (int)(Math.Floor(Convert.ToDouble(Kx / P[i+1])));
+                    Pc = (int)(6 * Co + 3 - (Math.Pow(-1, Co))) / 2;
+                    Ci = (int)(Math.Floor(Convert.ToDouble((2 * Pc - 3 * P[i] - P[i]) / (6 * P[i]))));
+
+                    foreach (int q in Q)
+                    {
+                        //J = Convert.ToInt32(Math.Round((2.0 * q - 3) / 6));
+                        P.Remove(q);
+                    }
+                    Q.Clear();
+                    
                 }
                 Pix = Kx - Pn + 2;
                 Console.WriteLine("pi(X) = {0}", Pix);
                 Console.WriteLine("Jx = {0}", Pn);
+
                 sw.Stop();
+
                 Console.WriteLine("Tiempo de ejecucion: {0}", sw.Elapsed);
                 Console.WriteLine("----------------------------------------");
+
+                foreach (int valor in P)
+                {
+                    Console.WriteLine("{0}. {1} ", P.IndexOf(valor) + 1, valor);
+                }
 
                 Console.WriteLine("¿Quiere volver a calcular? \n1. Si \n2. No");
                 while (pregunta)
