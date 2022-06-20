@@ -71,17 +71,17 @@ namespace NumerosPrimosSharp
                 sw.Start();
                 for (i = 1; i <= Ix; i++)
                 {
-                    Jxi = (int)Math.Floor(Convert.ToDouble(Kx / P[i] - Ci));    //Se debe redondear Jxi al menor valor con cero decimales
+                    Jxi = (int)Math.Floor(Convert.ToDouble(Kx / P[i - 1] - Ci));    //Se debe redondear Jxi al menor valor con cero decimales
                     Jii = i;
                     for (k = Jii; k <= Jxi; k++)
                     {
-                        Pj = P[i] * P[k];
+                        Pj = P[i - 1] * P[k - 1];
                         //J = Convert.ToInt32(Math.Round((2.0 * Pj - 3) / 6));    //Se debe redondear J al valor con cero decimales
                         Q.Add(Pj);
                         Pn += 1;
                         if (respuesta == 1)
                         {
-                            Console.WriteLine("i = {0} | k = {1} | Pk = {2} | J = {3}", i, k, Pj, J);
+                            Console.WriteLine("i = {0} | k = {1} | Pk = {2} | Ci = {3}", i, k, Pj, Ci);
                             Console.WriteLine("----------------------------------------");
                         }
                         //Console.ReadLine();
@@ -107,9 +107,16 @@ namespace NumerosPrimosSharp
                 Pix = Kx - Pn + 2;
                 Console.WriteLine("pi(X) = {0}", Pix);
                 Console.WriteLine("Jx = {0}", Pn);
+
                 sw.Stop();
+
                 Console.WriteLine("Tiempo de ejecucion: {0}", sw.Elapsed);
                 Console.WriteLine("----------------------------------------");
+
+                foreach (int valor in P)
+                {
+                    Console.WriteLine("{0}. {1} ", P.IndexOf(valor) + 1, valor);
+                }
 
                 Console.WriteLine("¿Quiere volver a calcular? \n1. Si \n2. No");
                 while (pregunta)
