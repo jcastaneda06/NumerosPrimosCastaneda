@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Numerics;
 
 namespace NumerosPrimosSharp
@@ -28,6 +29,7 @@ namespace NumerosPrimosSharp
                 int j = 0;
                 int Jxi = 1;
                 int Jii = 1;
+                int Jq = 0;
                 int J = 0;
                 int Pix = 0;
                 int Pj = 0;
@@ -43,15 +45,17 @@ namespace NumerosPrimosSharp
                 //Qx = (int)(Math.Floor(Math.Sqrt(X)));
                 Ix = (int)(Math.Floor(Convert.ToDouble((2 * Math.Sqrt(X) - 3) / 6)));
 
+                //P[0]=5 OJO DESPUES CON i rango Xi
 
                 //int Ji(Ix)				Variable arreglo
                 //int Jf(Ix)				Variable arreglo
                 Stopwatch sw = new Stopwatch();
-
-                for (k = 1; k <= Kx; k++)
+                for (k = 0; k <= Kx - 1; k++)
                 {
                     P.Add((int)(6 * k + 3 - Math.Pow(-1, k)) / 2);
                 }
+
+                Jxi = (int)Math.Floor(Convert.ToDouble(Kx / P.First()));
 
                 int m = 0;
                 int n = 0;
@@ -69,54 +73,56 @@ namespace NumerosPrimosSharp
                     Console.WriteLine("Introduccion no valida. No se imprimira por iteracion.");
                 }
                 sw.Start();
-                for (i = 1; i <= Ix; i++)
+                for (i = 0; i <= Ix - 1; i++)
                 {
-                    Jxi = (int)Math.Floor(Convert.ToDouble(Kx / P[i - 1] - Ci));    //Se debe redondear Jxi al menor valor con cero decimales
+                    
+                    Jxi = Kx - Co + i; //Se debe redondear Jxi al menor valor con cero decimales | Kx - 1 es para que se mantenga dentro de rango
                     Jii = i;
-                    for (k = Jii; k <= Jxi; k++)
+                    for (k = Jii; k <= Kx - 1; k++)
                     {
-                        Pj = P[i - 1] * P[k - 1];
+                        
+                        Pj = P[i] * P[k];
                         //J = Convert.ToInt32(Math.Round((2.0 * Pj - 3) / 6));    //Se debe redondear J al valor con cero decimales
                         Q.Add(Pj);
                         Pn += 1;
                         if (respuesta == 1)
                         {
-                            Console.WriteLine("i = {0} | k = {1} | Pk = {2} | Ci = {3}", i, k, Pj, Ci);
+                            Console.WriteLine("i =  {0}  |  Jii  =  {1}  |  Jfi  =  {2}  |  kx  =  {3}  |  k  =  {4}  |  Pk  = {5} | Jq = {6}", i, Jii, Jxi, Kx, k, Pj, Jq);
                             Console.WriteLine("----------------------------------------");
                         }
+                        Jq = Jq + 1;
                         //Console.ReadLine();
 
                     }
+
                     if (Pj > X)
                     {
                         Pn -= 1;
                     }
-                    
-                    Co = (int)(Math.Floor(Convert.ToDouble(Kx / P[i+1])));
-                    Pc = (int)(6 * Co + 3 - (Math.Pow(-1, Co))) / 2;
-                    Ci = (int)(Math.Floor(Convert.ToDouble((2 * Pc - 3 * P[i] - P[i]) / (6 * P[i]))));
 
-                    foreach (int q in Q)
-                    {
-                        //J = Convert.ToInt32(Math.Round((2.0 * q - 3) / 6));
-                        P.Remove(q);
-                    }
+                    Kx = Co;
+                    Co = Kx - Jq;
+                    //Co = (int)(Math.Floor(Convert.ToDouble(Kx / P[i+1])));
+                    //Pc = (int)(6 * Co + 3 - (Math.Pow(-1, Co))) / 2;
+                    //Ci = (int)(Math.Floor(Convert.ToDouble((2 * Pc - 3 * P[i] - P[i]) / (6 * P[i]))));
+
                     Q.Clear();
-                    
+                    Jq = 0;
+
                 }
                 Pix = Kx - Pn + 2;
                 Console.WriteLine("pi(X) = {0}", Pix);
                 Console.WriteLine("Jx = {0}", Pn);
-
+                Console.WriteLine("pi(X) f(q) = {0}", P.Count());
                 sw.Stop();
 
                 Console.WriteLine("Tiempo de ejecucion: {0}", sw.Elapsed);
                 Console.WriteLine("----------------------------------------");
 
-                foreach (int valor in P)
+                /*foreach (int valor in P)
                 {
                     Console.WriteLine("{0}. {1} ", P.IndexOf(valor) + 1, valor);
-                }
+                }*/
 
                 Console.WriteLine("¿Quiere volver a calcular? \n1. Si \n2. No");
                 while (pregunta)
