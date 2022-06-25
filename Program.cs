@@ -34,11 +34,10 @@ namespace NumerosPrimosSharp
                 int J = 0;
                 int Pix = 0;
                 int Piq = 0;
-                int qp = 0;
+                int y = 0; // y = (J2 - J1) para la Integral, i = f(J)
                 int Pj = 0;
                 int Pn = 0;
                 int Co = 0;
-                int y = 0;
                 int Riemann = 0;
 
                 Console.WriteLine("Introduzca X para pi(X) \nX = ");
@@ -58,6 +57,7 @@ namespace NumerosPrimosSharp
                 }
 
                 var Q = new List<int>();
+                var Qp = new List<int>();
                 var JF = new List<int>();
                 var JFfi = new List<int>();
                 int respuesta = 0;
@@ -68,7 +68,7 @@ namespace NumerosPrimosSharp
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Introduccion no valida. No se imprimira por iteracion.");
+                    Console.WriteLine("Introduccion no valida. No se imprimira por iteración.");
                 }
                 sw.Start();
                 for (i = 1; i <= If; i++)
@@ -88,7 +88,7 @@ namespace NumerosPrimosSharp
                             Pj = P[i] * P[j];
                             Q.Add(Pj);
                             Pn += 1;
-                            qp += 1;
+                            y += 1;
 
                             //if (respuesta == 1)
                             //{
@@ -100,8 +100,9 @@ namespace NumerosPrimosSharp
                         if (Pj > X)
                         {
                             Pn -= 1;
-                            qp -= 1;
+                            y -= 1;
                         }
+
                         foreach (int q in Q)
                         {
                             J = Convert.ToInt32(Math.Round((2.0 * q - 3) / 6));
@@ -111,8 +112,9 @@ namespace NumerosPrimosSharp
 
                         JF.Add(Piq);
                         JFfi.Add(Jffi);
-                        Jffi = qp + (ii - 1);
-                        y = Jffi - (ii - 1);
+                        Jffi = y + (ii - 1);
+                        //y = Jffi - (ii - 1); 
+                        Qp.Add(y);                     // 
                         Riemann = Piq - y;
                         if (Jffi >= ii)
                         {
@@ -123,9 +125,9 @@ namespace NumerosPrimosSharp
                                 Console.WriteLine("--------------------------------------------------------------------");
                             }
 
-                            Piq = Piq - qp;
-                            qp = 0;
-                            Q.Clear();
+                            Piq = Piq - y;
+                            y = 0;
+                            Q.Clear(); 
                         }
                     }
                 }
@@ -149,8 +151,8 @@ namespace NumerosPrimosSharp
                 Console.WriteLine("          Jx = {0}", Pn); // Suma de todas las celdas eliminadas
                 Console.WriteLine("          pi(x) Lista = {0}", Piq); // #Primos restantes en la lista
                 sw.Stop();
-                Console.WriteLine("Tiempo de ejecucion: {0}", sw.Elapsed);
-                Console.WriteLine("----------------------------------------");
+                Console.WriteLine("          Tiempo de ejecución: {0}", sw.Elapsed);
+                Console.WriteLine("--------------------------------------------------------------------");
 
                 Console.WriteLine("¿Quiere volver a calcular? \n1. Si \n2. No");
                 while (pregunta)
