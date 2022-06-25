@@ -88,6 +88,7 @@ namespace NumerosPrimosSharp
                         if (respuesta == 1)
                         {
                             Console.WriteLine("i =  {0}  |  Jii  =  {1}  |  Jfi  =  {2}  |  kx  =  {3}  |  k  =  {4}  |  Pk  = {5} | Jq = {6}", i, Jii, Jxi, Kx, k, Pj, Jq);
+                            //Console.WriteLine("i = {0} | k = {1} | Pk = {2} | Ci = {3}", i, k, Pj, Ci);
                             Console.WriteLine("----------------------------------------");
                         }
                         Jq = Jq + 1;
