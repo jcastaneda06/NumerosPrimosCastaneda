@@ -8,7 +8,7 @@ namespace NumerosPrimosSharp
 {
     internal class EliminacionDePosiciones
     {
-        static void Main(string[] args)
+        static void Main20(string[] args)
         {
             bool correr = true;
             int decision = 0;

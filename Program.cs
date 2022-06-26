@@ -15,6 +15,7 @@ namespace NumerosPrimosSharp
 
             Console.WriteLine("###### FUNCION CONTADORA DE #PRIMOS ######");
             Console.WriteLine("####### METODO INTEGRAL DE RIEMANN #######");
+            Console.WriteLine("################# RANGOS #################");
             Console.WriteLine("#### JESUS ALBERTO CASTAÑEDA GONZALEZ ####");
             Console.WriteLine("############# +507 6231-9187 #############");
             Console.WriteLine("########## irojacastag@gmail.com #########");
@@ -34,7 +35,7 @@ namespace NumerosPrimosSharp
                 int J = 0;
                 int Pix = 0;
                 int Piq = 0;
-                int y = 0; // y = (J2 - J1) para la Integral, i = f(J)
+                int y = 0; // y = f(J2-J1) para la Integral, i = f(J)
                 int Pj = 0;
                 int Pn = 0;
                 int Co = 0;
@@ -51,6 +52,7 @@ namespace NumerosPrimosSharp
 
                 Stopwatch sw = new Stopwatch();
 
+                sw.Start(); //DEBE CONTAR LOS SEGUNDOS DE LA CARGA DEL ARREGLO O LISTA P[j]
                 for (j = 1; j <= Jf; j++)
                 {
                     P[j] = (int)(6 * j + 3 - Math.Pow(-1, j)) / 2;
@@ -70,7 +72,7 @@ namespace NumerosPrimosSharp
                 {
                     Console.WriteLine("Introduccion no valida. No se imprimira por iteración.");
                 }
-                sw.Start();
+                //sw.Start();
                 for (i = 1; i <= If; i++)
                 {
                     if (P[i] != 0)
@@ -90,11 +92,11 @@ namespace NumerosPrimosSharp
                             Pn += 1;
                             y += 1;
 
-                            //if (respuesta == 1)
-                            //{
-                                //Console.WriteLine("i = {0} | j = {1} | P(i) = {2}  | P(j) = {3}  | Pj = {4}", i, j, P[i], P[j], Pj);
-                                //Console.WriteLine("------------------------------------------------------------------------------");
-                            //}
+                            if (respuesta == 1) //ACTIVAR SOLO EN CASO DE REVISION DEL CODIGO O PARA UNA MEJOR COMPRENSION DE RESULTADOS CON OBJETIVO DIDACTICO
+                            {
+                            Console.WriteLine("i = {0} | j = {1} | P(i) = {2}  | P(j) = {3}  | Pj = {4}", i, j, P[i], P[j], Pj);
+                            Console.WriteLine("------------------------------------------------------------------------------");
+                            }
                         }
 
                         if (Pj > X)
@@ -109,25 +111,26 @@ namespace NumerosPrimosSharp
                             P[J] = 0;
                         }
 
-
-                        JF.Add(Piq);
-                        JFfi.Add(Jffi);
-                        Jffi = y + (ii - 1);
-                        //y = Jffi - (ii - 1); 
-                        Qp.Add(y);                     // 
-                        Riemann = Piq - y;
+                        //JF.Add(Piq);    //DESACTIVADO PARA MEDIR VELOCIDAD
+                        //JFfi.Add(Jffi); //DESACTIVADO PARA MEDIR VELOCIDAD
+                        //Qp.Add(y);      //DESACTIVADO PARA MEDIR VELOCIDAD
+                        Jffi = y + (ii - 1);                    
+                        
                         if (Jffi >= ii)
                         {
                             if (respuesta == 1)
                             {
                                 Console.WriteLine("--------------------------------------------------------------------");
-                                Console.WriteLine("i = {0} | jii = {1} | Jf = {2}  | Jfi = {3}  | f(J) = J2 - J1 = {4}", ii, ii, Piq, Jffi, y);
+                                Console.WriteLine("i = {0} | jii = {1}  |  Jfi = {2}| Jf = {3}  | i=f(J)=(J2-J1) = {4}", ii, ii, Jffi, Piq, y);
                                 Console.WriteLine("--------------------------------------------------------------------");
                             }
 
                             Piq = Piq - y;
                             y = 0;
-                            Q.Clear(); 
+                            Q.Clear();
+                        }
+                        {
+                            Riemann = Piq - y;
                         }
                     }
                 }
@@ -145,6 +148,7 @@ namespace NumerosPrimosSharp
                 }
                 
                 Pix = Jf - Pn + Co;
+
                 Console.WriteLine("          X = {0}", X);
                 Console.WriteLine("          pi(x) Integral de Riemann = {0}", Riemann); // Resto después de la Integral
                 Console.WriteLine("          pi(x) = {0}", Pix); // Ecuación Jf - J(x) + 2
