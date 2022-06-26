@@ -12,10 +12,9 @@ namespace NumerosPrimosSharp
             bool correr = true;
             int decision = 0;
             DateTime fecha;
-            CultureInfo culture;
 
             Console.WriteLine("############################### FUNCION CONTADORA DE PRIMOS #################################");
-            Console.WriteLine("############################### METODO PRODUCTORIA CASTAÑEDA ################################");
+            Console.WriteLine("########################## METODO INTEGRAL DE RIEMANN CASTAÑEDA ################################");
             Console.WriteLine("###################################### +507 6231-9187 #######################################");
             Console.WriteLine("################################## irojacastag@gmail.com ####################################");
 
@@ -47,7 +46,7 @@ namespace NumerosPrimosSharp
                 //int Ji(Ix)				Variable arreglo
                 //int Jf(Ix)				Variable arreglo
                 Stopwatch sw = new Stopwatch();
-
+                sw.Start();
                 for (k = 1; k <= Kx; k++)
                 {
                     P[k] = (int)(6 * k + 3 - Math.Pow(-1, k)) / 2;
@@ -59,7 +58,7 @@ namespace NumerosPrimosSharp
 
                 var Q = new List<int>();
                 int respuesta = 0;
-                try
+                /*try
                 {
                     Console.WriteLine("Desea imprimir los valores cada iteracion?\n1. Si");
                     respuesta = Convert.ToInt32(Console.ReadLine());
@@ -67,8 +66,8 @@ namespace NumerosPrimosSharp
                 catch (Exception)
                 {
                     Console.WriteLine("Introduccion no valida. No se imprimira por iteracion.");
-                }
-                sw.Start();
+                }*/
+                
                 for (i = 1; i <= Ix; i++)
                 {
                     if (P[i] != 0)
@@ -85,11 +84,11 @@ namespace NumerosPrimosSharp
                             //J = Convert.ToInt32(Math.Round((2.0 * Pj - 3) / 6));    //Se debe redondear J al valor con cero decimales
                             Q.Add(Pj);
                             Pn += 1;
-                            if (respuesta == 1)
+                            /*if (respuesta == 1)
                             {
                                 Console.WriteLine("i = {0} | k = {1} | Pk = {2} | J = {3}", i, k, Pj, J);
                                 Console.WriteLine("----------------------------------------");
-                            }
+                            }*/
                             //Console.ReadLine();
 
                         }
