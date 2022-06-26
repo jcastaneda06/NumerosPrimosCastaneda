@@ -15,7 +15,7 @@ namespace NumerosPrimosSharp
 
             Console.WriteLine("###### FUNCION CONTADORA DE #PRIMOS ######");
             Console.WriteLine("####### METODO INTEGRAL DE RIEMANN #######");
-            Console.WriteLine("################# RANGOS #################");
+            Console.WriteLine("############# V1.3 EDUCATIVA #############");
             Console.WriteLine("#### JESUS ALBERTO CASTAÑEDA GONZALEZ ####");
             Console.WriteLine("############# +507 6231-9187 #############");
             Console.WriteLine("########## irojacastag@gmail.com #########");
@@ -40,7 +40,11 @@ namespace NumerosPrimosSharp
                 int Pn = 0;
                 int Co = 0;
                 int Riemann = 0;
-
+                /*gfokhkerg
+                 hertert
+                herth
+                ertherth
+                */
                 Console.WriteLine("Introduzca X para pi(X) \nX = ");
                 X = Convert.ToInt32(Console.ReadLine());
 

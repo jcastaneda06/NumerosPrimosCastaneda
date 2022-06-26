@@ -8,7 +8,7 @@ namespace NumerosPrimosSharp
 {
     internal class EliminacionDePosiciones
     {
-        static void Main20(string[] args)
+        static void Main(string[] args)
         {
             bool correr = true;
             int decision = 0;
@@ -26,16 +26,12 @@ namespace NumerosPrimosSharp
                 int Ix = 0;
                 int k = 0;
                 int i = 0;
-                int j = 0;
                 int Jxi = 1;
                 int Jii = 1;
                 int Jq = 0;
-                int J = 0;
                 int Pix = 0;
                 int Pj = 0;
-                int Ci = 0;
                 int Co = 0;
-                int Pc = 0;
 
                 Console.WriteLine("Introduzca X para pi(X) \nX = ");
                 X = Convert.ToInt32(Console.ReadLine());
@@ -57,10 +53,7 @@ namespace NumerosPrimosSharp
 
                 Jxi = (int)Math.Floor(Convert.ToDouble(Kx / P.First()));
 
-                int m = 0;
-                int n = 0;
                 int Pn = 0;
-
                 var Q = new List<int>();
                 int respuesta = 0;
                 try
