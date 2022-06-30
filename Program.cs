@@ -22,8 +22,12 @@ namespace NumerosPrimosSharp
 
             while (correr)
             {
-                bool pregunta = true;
-                bool tabla = true;
+                bool pregunta1 = true;
+                bool pregunta2 = true;
+                bool pregunta3 = true;
+                int respuesta1 = 0;
+                int respuesta2 = 0;
+                int respuesta3 = 0;
                 int X = 0;
                 int If = 0;
                 int Jf = 0;
@@ -43,6 +47,7 @@ namespace NumerosPrimosSharp
                 int Riemann = 0;
                 int Co = 0;
                 int Jii = 0;
+                int bin = 0;
 
                 Console.WriteLine("Introduzca X para pi(X) \nX = ");
                 X = Convert.ToInt32(Console.ReadLine());
@@ -55,16 +60,16 @@ namespace NumerosPrimosSharp
                 Piq = Jf;
                 Jffi = (int)Math.Floor(Convert.ToDouble(Jf / 5)); 
 
-                int respuesta = 0;
+                
                 try
                 {
-                    Console.WriteLine("Desea imprimir los cálculos paso a paso cada iteración?\n1. Si");
-                    respuesta = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Estamos calculando...... Se imprimira cálculos pasa a paso cada iteración para Pi(x)");
+                    Console.WriteLine("Desea imprimir los cálculos paso a paso cada iteración P(i) * P(j)?\n1. Si");
+                    respuesta1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine(" Estamos calculando...... Se imprimirá cálculos pasa a paso cada iteración P(i) * P(j) ");
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Estamos calculando...... Solo se imprimira Pi(x)");
+                    Console.WriteLine("Estamos calculando...... Solo se imprimirá pi(x) y J(x)");
                 }
 
                 Stopwatch sw = new Stopwatch();
@@ -93,7 +98,7 @@ namespace NumerosPrimosSharp
                                     Pn += 1;
                                     y += 1;
                                     /*
-                                    if (respuesta == 1) //ACTIVAR SOLO EN CASO DE REVISION DEL CODIGO O PARA UNA MEJOR COMPRENSION DE RESULTADOS CON OBJETIVO DIDACTICO
+                                    if (respuesta1 == 1) //ACTIVAR SOLO EN CASO DE REVISION DEL CODIGO O PARA UNA MEJOR COMPRENSION DE RESULTADOS CON OBJETIVO DIDACTICO
                                     {
                                         if (Pj <= X)
                                         {
@@ -120,7 +125,7 @@ namespace NumerosPrimosSharp
                             if (Jffi >= ii)
                             {
                                 Jffi = y + (ii);
-                                if (respuesta == 1)
+                                if (respuesta1 == 1)
                                 {
                                     Console.WriteLine("--------------------------------------------------------------------");
                                     Console.WriteLine("i = {0} | jii = {1}  |  Jfi = {2}| Jf = {3}  | i=f(J)=(J2-J1) = {4}", ii, ii, Jffi, Piq, y);
@@ -158,42 +163,125 @@ namespace NumerosPrimosSharp
                     Console.WriteLine("          Tiempo de ejecución: {0}", sw.Elapsed);
                     Console.WriteLine("--------------------------------------------------------------------");
 
-                //DESEA IMPRIMIR TABLA CON VALORES DE "X' "Pi(x), P(I)
-                //Console.WriteLine("¿Deesa imprimir tabla de calores X - Pi(x) - P(i)? \n1. Si \n2. No");
-                //while (tabla)
-                //{
-                  //  try
-                    //{
-                      //  decision = Convert.ToInt32(Console.ReadLine());
-                        //switch (decision)
-                        //{
-                          //  case 1:
-                            //    pregunta = false;
-                              //  break;
+                //*****************************************************************************************************************************************
+                //OPCION PARA IMPRIMIR LOS NUMEROS PRIMOS P(i) <= X
 
-                            //case 2:
-                              //  correr = false;
-                                //pregunta = false;
-                                //break;
+                Console.WriteLine("¿Deesa imprimir Lista de Números Primos <= X? \n1. Si \n2. No");
+                //respuesta2 = true;
+                while (pregunta2)
+                {
+                    try
+                    {
+                        respuesta2 = Convert.ToInt32(Console.ReadLine());
+                        pregunta2 = false;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Incorrecto. Introduzca un valor entre 1 y 2.");
+                    }
+                }
 
-                            //default:
-                              //  Console.WriteLine("Introduzca un numero entre 1 y 2. 1. Continuar con el programa \n2. Salir");
-                                //break;
-                        //}
-                    //}
-                    //catch (Exception)
-                    //{
-                      //  Console.WriteLine("Entrada no valida. Elija 1 para continuar o 2 para salir.");
-                    //}
 
-                //for (k = 1; k <= X; k++)
-                //{
+                if (respuesta2 == 1)
+                {
+                    Console.WriteLine("Se imprimirá Tabla de Números Primos <= X");
+                    
+                    Console.WriteLine("     X = {0}             | pi(x) = {1}", 1, 2);
+                    Console.WriteLine("     X = {0}             | pi(x) = {1}", 2, 3);
+                    j = 2;
+                    foreach (int p in P)
+                    {
+                        if (p != 0)
+                        {
+                            j = j + 1;
+                            Console.WriteLine("     X = {0}             | pi(x) = {1}", j, p);
+                        }
+                    }
+                }
 
-                //}
+                //*****************************************************************************************************************************************
+                //OPCION PARA IMPRIMIR TABLA PARA GRAFICAR LA FUNCION Pi(x) = f(x)
 
-                    //**************************************************************
-                    Console.WriteLine("¿Quiere volver a calcular? \n1. Si \n2. No");
-                while (pregunta)
+                Console.WriteLine("¿Deesa imprimir Tabla para Graficar la Función pi(x) = f(x)? \n1. Si \n2. No");
+                //respuesta3 = true;
+                while (pregunta3)
+                {
+                    try
+                    {
+                        respuesta3 = Convert.ToInt32(Console.ReadLine());
+                        pregunta3 = false;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Incorrecto. Introduzca un valor entre 1 y 2.");
+                    }
+                }
+
+                if (respuesta3 == 1)
+                {
+                    Console.WriteLine("Estamos calculando...... Se imprimirá Tabla de Datos para Graficar la Función pi(x) = f(x)");
+                    var máximo = P.Max(); //P.ElementAt(P.Count()); //SE DEBE CAMBIAR P.ElementAt para seleccionar P máxima
+                    int kTemporal = 1;
+                    Pix = 0;
+                    foreach (int p in P)
+                    {
+                        for (k = kTemporal; k <= X; k++)
+                        {
+                            bin = 0;
+                            if (k >= 4)
+                            {
+                                if (k > p)
+                                {
+                                    if (k >= máximo)// AQUI
+                                    {
+                                        bin = 0;
+                                    }
+                                    else
+                                    {
+                                        bin = 0;
+                                        kTemporal = k;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    if (k < p)
+                                    {
+                                        bin = 0;
+                                    }
+                                    else
+                                        if (k == p)
+                                    {
+                                        bin = 1;
+                                    }
+
+                                }
+                        
+                                Pix = Pix + bin;
+                                Console.WriteLine("     X = {0}             | pi(x) = {1}", k, Pix);
+
+                            }
+                            else
+                            {
+                                if (k == 1)
+                                {
+                                    bin = 0;
+                                }
+                                else
+                                {
+                                    bin = 1;
+                                }
+                                Pix = Pix + bin;
+                                Console.WriteLine("     X = {0}             | pi(x) = {1}", k, Pix);
+                            }
+                        }
+                    }
+                }
+
+                //**************************************************************
+
+                Console.WriteLine("¿Quiere volver a calcular para otro valor dado X? \n1. Si \n2. No");
+                while (pregunta1)
                 {
                     try
                     {
@@ -201,22 +289,22 @@ namespace NumerosPrimosSharp
                         switch (decision)
                         {
                             case 1:
-                                pregunta = false;
+                                pregunta1 = false;
                                 break;
 
                             case 2:
                                 correr = false;
-                                pregunta = false;
+                                pregunta1 = false;
                                 break;
 
                             default:
-                                Console.WriteLine("Introduzca un numero entre 1 y 2. 1. Continuar con el programa \n2. Salir");
+                                Console.WriteLine("Introduzca un número entre 1 y 2. 1. Continúar con el programa \n2. Salir");
                                 break;
                         }
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("Entrada no valida. Elija 1 para continuar o 2 para salir.");
+                        Console.WriteLine("Incorrecto. Elija 1 para continuar o 2 para salir.");
                     }
                 }
             }
